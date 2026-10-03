@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>یه نامه برای تو</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
+  body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+  }
+  .card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 22px;
+    max-width: 520px;
+    width: 100%;
+    padding: 35px 26px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: fadeIn 0.6s ease;
+    display: none;
+  }
+  .card.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e94560, #903749);
+    display: flex; justify-content: center; align-items: center;
+    margin: 0 auto 18px;
+    font-size: 34px;
+    box-shadow: 0 0 25px rgba(233,69,96,0.6);
+  }
+  .title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13.5px;
+    color: #a0a0b8;
+    margin-bottom: 22px;
+    line-height: 1.9;
+  }
+  .divider {
+    height: 1px;
+    background: linear-gradient(to left, transparent, #e94560, transparent);
+    margin: 20px 0;
+  }
+  input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.07);
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.3s;
+    margin-bottom: 14px;
+    resize: vertical;
+  }
+  input:focus, textarea:focus {
+    border-color: #e94560;
+    background: rgba(233,69,96,0.1);
+  }
+  input::placeholder, textarea::placeholder { color: #8888a0; }
+  textarea { min-height: 90px; line-height: 1.9; }
+  .btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e94560, #903749);
+    color: #fff;
+    font-size: 15.5px;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(233,69,96,0.35);
+    margin-top: 6px;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(233,69,96,0.5); }
+  .btn:active { transform: scale(0.97); }
+  .letter {
+    font-size: 14.5px;
+    line-height: 2.1;
+    color: #e4e4f0;
+    text-align: justify;
+  }
+  .letter p { margin-bottom: 14px; }
+  .highlight { color: #e94560; font-weight: bold; }
+  .from-box {
+    background: rgba(233,69,96,0.1);
+    border: 1px dashed rgba(233,69,96,0.5);
+    border-radius: 14px;
+    padding: 20px 18px;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .from-box .from-label { font-size: 13px; color: #a0a0b8; margin-bottom: 8px; }
+  .from-box .from-name { font-size: 22px; font-weight: bold; color: #e94560; }
+  .q-number {
+    font-size: 13px;
+    color: #e94560;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .q-text {
+    font-size: 15px;
+    line-height: 1.95;
+    color: #e4e4f0;
+    margin-bottom: 14px;
+  }
+  .signature { margin-top: 20px; text-align: left; font-size: 14px; color: #c0c0d8; font-style: italic; }
+  .progress {
+    text-align: center;
+    font-size: 12.5px;
+    color: #8888a0;
+    margin-bottom: 15px;
+  }
+</style>
+</head>
+<body>
+
+<!-- صفحه ۱: اسم -->
+<div class="card active" id="page-name">
+  <div class="avatar">❤</div>
+  <div class="title">قبل از شروع</div>
+  <div class="subtitle">لطفاً اسمت رو بنویس</div>
+  <input type="text" id="input-name" placeholder="اسمت..." autocomplete="off">
+  <button class="btn" onclick="submitName()">ادامه</button>
+</div>
+
+<!-- صفحه ۲: سن -->
+<div class="card" id="page-age">
+  <div class="avatar">❤</div>
+  <div class="title">چند سالته؟</div>
+  <div class="subtitle">سن واقعیت رو بنویس</div>
+  <input type="number" id="input-age" placeholder="سن..." autocomplete="off">
+  <button class="btn" onclick="submitAge()">ادامه</button>
+</div>
+
+<!-- صفحه ۳: خودش -->
+<div class="card" id="page-about">
+  <div class="avatar">❤</div>
+  <div class="title">یه کم از خودت بگو</div>
+  <div class="subtitle">چه آدمی هستی؟ چه چیزایی دوست داری؟</div>
+  <textarea id="input-about" placeholder="اینجا بنویس..."></textarea>
+  <button class="btn" onclick="submitAbout()">ادامه</button>
+</div>
+
+<!-- صفحه ۴: پیام از طرف محمد -->
+<div class="card" id="page-from">
+  <div class="avatar">❤</div>
+  <div class="from-box">
+    <div class="from-label">این نامه از طرف</div>
+    <div class="from-name">محمد</div>
+  </div>
+  <div class="subtitle">این نامه و لینک از طرف منه. لطفاً با دقت بخونش.</div>
+  <button class="btn" onclick="showPage('page-letter')">خوندن نامه</button>
+</div>
+
+<!-- صفحه ۵: نامه اصلی -->
+<div class="card" id="page-letter">
+  <div class="title" style="color:#e94560; font-size:22px;">سلام سودا</div>
+  <div class="divider"></div>
+  <div class="letter">
+    <p>نمی‌خوام این پیام شبیه دعوا یا اتهام باشه. فقط می‌خوام یه چیزی رو بگم که از دیشب داره آزارم می‌ده و نمی‌تونم ازش بگذرم.</p>
+    <p>دیشب بهم گفتی عمت فهمیده داری با من چت می‌کنی و گفتی دیگه پیام ندم. من قبول کردم، چون بهت اعتماد داشتم و گفتم شاید واقعاً شرایط سخته و نمی‌خوای دردسر بشه.</p>
+    <p>ولی <span class="highlight">نیم ساعت بعد</span> دیدم استوری منو سین کردی و تو اپ‌های دیگه هم آنلاین شدی.</p>
+    <p>این برام سنگین بود. چون یعنی مشکلت با <span class="highlight">«من»</span> نبود، مشکلت با <span class="highlight">«دیده شدن»</span> بود. اگه واقعاً عمت فهمیده بود، چرا تو اپ‌های دیگه آنلاین می‌شی؟ یعنی اونجاها عمت نیست؟ یا اینکه فقط می‌خواستی به من بگی پیام ندم؟</p>
+    <p>من نمی‌خوام تو ابهام بمونم. نمی‌خوام هر شب فکر کنم پشت این سکوت چه چیزی پنهونه. اگه چیزی هست، بهتره شفاف بگی. من آدمی نیستم که از حقیقت بترسم، ولی از مخفی‌کاری و دروغ بدم میاد.</p>
+  </div>
+  <div class="divider"></div>
+  <button class="btn" onclick="showPage('page-intro-q')">ادامه</button>
+</div>
+
+<!-- صفحه ۶: مقدمه سوالات -->
+<div class="card" id="page-intro-q">
+  <div class="avatar">❤</div>
+  <div class="letter" style="text-align:center;">
+    <p>من این سوال‌ها رو پرسیدم چون برام مهمی. اگه جواب‌هات صادقانه باشه، حتی اگه سخت باشه، می‌تونم بفهمم.</p>
+    <p>ولی اگه بپیچونی یا عصبانی بشی، من جوابم رو گرفتم.</p>
+    <p style="color:#e94560; font-weight:bold;">منتظر جوابتم.</p>
+  </div>
+  <div class="divider"></div>
+  <button class="btn" onclick="startQuestions()">شروع سوال‌ها</button>
+</div>
+
+<!-- صفحه ۷: سوالات -->
+<div class="card" id="page-question">
+  <div class="progress" id="progress-text">سوال ۱ از ۱۰</div>
+  <div class="divider"></div>
+  <div class="q-number" id="q-number">سوال ۱</div>
+  <div class="q-text" id="q-text"></div>
+  <textarea id="q-answer" placeholder="جوابت رو بنویس..."></textarea>
+  <button class="btn" id="q-btn" onclick="submitAnswer()">ادامه</button>
+</div>
+
+<!-- صفحه ۸: نامه عاشقانه -->
+<div class="card" id="page-love">
+  <div class="title" style="color:#e94560; font-size:20px;">یه چیز دیگه هم هست...</div>
+  <div class="divider"></div>
+  <div class="letter">
+    <p>سودا جان،</p>
+    <p>می‌دونم این چند تا سوال شاید سنگین بود. ولی می‌خواستم قبل از اینکه این صفحه رو ببندی، یه چیزی رو بگم که شاید تو شلوغی این چند روز گم شده.</p>
+    <p>من هنوز همون آدمی‌ام که وقتی باهات حرف می‌زنه، حالش خوب می‌شه. هنوزم وقتی اسمت رو می‌بینم، یه چیزی تو دلم تکون می‌خوره. این چیزها با یه پیام و یه سین کردن و یه آنلاین شدن عوض نمی‌شه.</p>
+    <p>من ازت دور نشدم. من فقط گیج شدم. گیج شدم از اینکه چرا یهو سرد شدی، چرا مخفی‌کاری کردی، چرا به من گفتی پیام ندم ولی خودت آنلاین موندی.</p>
+    <p>ولی بدون که این نامه از سر خشم نیست. از سر دلتنگیه. از سر اینکه برام مهمی و نمی‌خوام این‌طوری تموم بشه.</p>
+    <p>اگه هنوزم دوستم داری، بدون که منم هنوز همون‌جوام. منتظرتم.</p>
+    <div class="signature">— محمد</div>
+  </div>
+  <div class="divider"></div>
+  <button class="btn" onclick="showPage('page-free')">ادامه</button>
+</div>
+
+<!-- صفحه ۹: پیام آزاد -->
+<div class="card" id="page-free">
+  <div class="avatar">❤</div>
+  <div class="title">الان نوبت توئه</div>
+  <div class="subtitle">هر چیزی که تو دلت مونده، اینجا بنویس. این پیام فقط برای منه. صادقانه بنویس، حتی اگه سخت باشه.</div>
+  <textarea id="input-free" placeholder="اینجا بنویس..." style="min-height: 140px;"></textarea>
+  <button class="btn" onclick="submitFree()">ارسال</button>
+</div>
+
+<!-- صفحه ۱۰: پایان -->
+<div class="card" id="page-end">
+  <div class="avatar">❤</div>
+  <div class="title">ممنون که صادقانه نوشتی.</div>
+  <div class="subtitle" style="margin-top:14px;">منتظرتم.</div>
+  <div class="signature" style="text-align:center;">— محمد</div>
+</div>
+
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxmSSsAgULTCvDwVY4h6MISNfvhagWW3M1SnV1zlRtcTWh_V1Pc8o-4Zbf-QYwfDiiLAQ/exec';
+
+  const REAL_NAME = 'سودا';
+
+  const QUESTIONS = [
+    'واقعاً عمت فهمید یا خودت خواستی یه مدت از من فاصله بگیری و این بهونه بود؟',
+    'چرا بعد از اینکه گفتی «پیام نده»، استوری منو سین کردی؟',
+    'چرا تو اپ‌های دیگه آنلاین شدی ولی به من پیام ندادی؟ با کی حرف می‌زدی؟',
+    'اگه واقعاً عمت فهمیده، چرا از اپ‌های دیگه استفاده می‌کنی؟ اونجاها عمت نیست؟',
+    'از چی یا کی می‌ترسی که اینقدر مخفی‌کاری می‌کنی؟ از عمت، از خانواده‌ت، یا از من؟',
+    'اگه من همین کار رو بکنم — بگم خانوادم فهمیدن، بعد آنلاین بشم و به تو جواب ندم — تو چه حسی بهت دست می‌ده؟',
+    'تا حالا شده به خاطر ترس از دعوا، چیزی رو از من مخفی کنی یا دروغ بگی؟',
+    'اگه واقعاً می‌خوای با من باشی، چرا راهش رو مخفی‌کاری می‌بینی نه شفافیت؟',
+    'اگه یکی تو اپ‌های دیگه باهات چت کنه، جواب می‌دی یا نه؟',
+    'ته دلت می‌خوای این رابطه ادامه داشته باشه یا فقط داری وقت می‌کشی؟'
+  ];
+
+  let currentQuestion = 0;
+
+  function showPage(id) {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function sendToScript(step, value, warning = '') {
+    if (!SCRIPT_URL || SCRIPT_URL.includes('اینجا')) return;
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ step: step, value: value, warning: warning })
+    }).catch(() => {});
+  }
+
+  function submitName() {
+    const val = document.getElementById('input-name').value.trim();
+    if (!val) { alert('لطفاً اسمت رو بنویس'); return; }
+    let warning = '';
+    if (val !== REAL_NAME) {
+      warning = `اسم وارد شده «${val}» بود، ولی اسم واقعی سوداست.`;
+    }
+    sendToScript('اسم', val, warning);
+    showPage('page-age');
+  }
+
+  function submitAge() {
+    const val = document.getElementById('input-age').value.trim();
+    if (!val) { alert('لطفاً سنت رو بنویس'); return; }
+    sendToScript('سن', val);
+    showPage('page-about');
+  }
+
+  function submitAbout() {
+    const val = document.getElementById('input-about').value.trim();
+    if (!val) { alert('لطفاً یه کم از خودت بنویس'); return; }
+    sendToScript('درباره خودش', val);
+    showPage('page-from');
+  }
+
+  function startQuestions() {
+    currentQuestion = 0;
+    renderQuestion();
+    showPage('page-question');
+  }
+
+  function renderQuestion() {
+    document.getElementById('progress-text').textContent =
+      `سوال ${currentQuestion + 1} از ${QUESTIONS.length}`;
+    document.getElementById('q-number').textContent =
+      `سوال ${currentQuestion + 1}`;
+    document.getElementById('q-text').textContent =
+      QUESTIONS[currentQuestion];
+    document.getElementById('q-answer').value = '';
+    document.getElementById('q-btn').textContent =
+      currentQuestion === QUESTIONS.length - 1 ? 'ادامه' : 'ادامه';
+  }
+
+  function submitAnswer() {
+    const val = document.getElementById('q-answer').value.trim();
+    if (!val) { alert('لطفاً جوابت رو بنویس'); return; }
+    const qNum = currentQuestion + 1;
+    sendToScript(`سوال ${qNum}`, val);
+    currentQuestion++;
+    if (currentQuestion >= QUESTIONS.length) {
+      showPage('page-love');
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function submitFree() {
+    const val = document.getElementById('input-free').value.trim();
+    if (!val) { alert('لطفاً پیامت رو بنویس'); return; }
+    sendToScript('پیام آزاد', val);
+    showPage('page-end');
+  }
+</script>
+
+</body>
+</html>
